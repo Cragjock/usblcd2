@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1501465433 source:/home/pi/projects/usblcd2/lcd_class.cpp
+	"stdafx.h"
+
+1501341839 /home/pi/projects/usblcd2/stdafx.h
+	<stdio.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<iterator>
+	<map>
+	<bitset>
+	"lcd_class.h"
+	<string>
+	<sstream>
+	<cstdlib>
+
+1501545916 /home/pi/projects/usblcd2/lcd_class.h
+	<iostream>
+	<string>
+	<sstream>
+	<cstdlib>
+	<fstream>
+	<vector>
+	<iterator>
+	<map>
+	<bitset>
+
+1501546206 source:/home/pi/projects/usblcd2/usb_lcd.cpp
+	"stdafx.h"
+
