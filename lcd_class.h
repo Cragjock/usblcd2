@@ -25,8 +25,11 @@
 #define LCD_MOVECURSOR_FORWARD      0x4D
 #define LCD_UNDERLINECURSOR_ON      0x4A
 #define LCD_UNDERLINECURSOR_OFF     0x4B
+#define LCD_SETCUSTOMBMP            0x4E
 #define LCD_BLOCKCURSOR_ON          0x53
 #define LCD_BLOCKCURSOR_OFF         0x54
+#define LCD_DISPLAY_SHIFT_R      0x5A
+#define LCD_DISPLAY_SHIFT_L      0x5B
 
 /****** special chars */
 #define LCD_CUSTOM_CHARACTER 0x4E       /// 9 args: char #, 8 bytes data
@@ -152,6 +155,11 @@ enum myColor { RED = 2, GREEN, BLUE };
         void lcd_set_cursor_address(uint8_t address);
 		void set_color(int, int, int);
 		void lcd_usb_splash(std::string mystring);
+        void lcd_move_left(void);
+        void lcd_move_right(void);
+
+        template<typename T>
+		int lcd_write(T message);
 
 
 
@@ -162,6 +170,12 @@ enum myColor { RED = 2, GREEN, BLUE };
 		int G;
 		int B;
 		std::ofstream in;
+		char* command_param;
+		//bool write_command(char command, int, const char*);
+		//bool write_command(char command, int size=0, const char* buffer=0);
+		bool write_command(char command);
+		bool write_command(char command, int bsize, const std::vector<int> buffer);
+
 
        // void lcd_close(void);
         // int lcd_init(void);
@@ -174,8 +188,7 @@ enum myColor { RED = 2, GREEN, BLUE };
         //void lcd_cursor_off(void);
         void lcd_backlight_on(void);
         void lcd_backlight_off(void);
-        //void lcd_move_left(void);
-        //void lcd_move_right(void);
+
         //void lcd_left_to_right(void);
         //void lcd_right_to_left(void);
         //void lcd_autoscroll_on(void);
@@ -194,4 +207,14 @@ enum myColor { RED = 2, GREEN, BLUE };
         void lcd_send_command(uint8_t command);
         void lcd_send_data(uint8_t data);
     };
+
+    template<typename T>
+	int lcddisplay::lcd_write(T message)
+	{
+
+		this->in << message << std::flush;
+		return 0;
+
+	}
+
 #endif // MY_USB_LCD_CLASS_H
